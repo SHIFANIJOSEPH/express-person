@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const personController = require("./person/personController")
 
 const app = express();
 app.use(cors());
@@ -21,9 +22,7 @@ const people = [
   {id: 2, name: 'Anna', surname: 'Dopey'},
 ];
 
-app.get('/people', (req, res) => {
-  res.send(people);
-});
+app.get('/people',personController.getPeople);
 
 app.get('/people/:id', (req, res) => {
   const personId = +req.params.id;

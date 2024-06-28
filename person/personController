@@ -1,0 +1,49 @@
+const people = [
+  {id: 1, name: 'John', surname: 'Doe',age:25},
+  {id: 2, name: 'Anna', surname: 'Dopey',age:30},
+  {id:3,name:'shifani',surname:'shif',age:19},
+  {id:4,name:'siva',surname:'siva',age:19},
+  {id:5,name:'jasmine',surname:'jas',age:35},
+];
+
+const getPeople=(req, res) => {
+    res.send(people);
+    };
+    
+
+const getPeopleId= (req, res) => {
+    const personId = +req.params.id;
+  
+    const person = people.find(person => person.id === personId);
+  
+    if(!person) {
+      res.sendStatus(404);
+      return;
+    }
+  
+    res.send(person);
+  };
+  const getPeopleAge=(req, res) => {
+    const peopleAbove30 = people.filter(person => person.age > 30);
+    res.send(peopleAbove30);
+  };
+
+  const getPeopleAgeQuery=(req, res) => {
+    const { ageAbove } = req.query;
+  
+    if (ageAbove) {
+      const filteredPeople = people.filter(p => p.age > Number(ageAbove));
+      res.send(filteredPeople);
+    } else {
+      res.send('Not found');
+    }
+};
+
+module.exports={
+    getPeople,
+    getPeopleId,
+    getPeopleAge,
+    getPeopleAgeQuery
+};
+
+  
